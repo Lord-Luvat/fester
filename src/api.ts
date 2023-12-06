@@ -2,7 +2,7 @@ import express from 'express';
 
 const api = express();
 
-api.get('/eth-mainnet/estimate-fee', (req, res) => {
+api.get('/eth-mainnet/estimate-fee', (_req, res) => {
   try {
     res.status(200).json({
       data: {
@@ -16,5 +16,7 @@ api.get('/eth-mainnet/estimate-fee', (req, res) => {
     });
   }
 });
+
+export { api };
 
 export default api;

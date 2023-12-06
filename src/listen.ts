@@ -3,7 +3,7 @@ import Web3 from 'web3';
 import pino from 'pino';
 import pretty from 'pino-pretty';
 
-const logger = pino(
+export const logger = pino(
   pretty({
     colorize: true,
     ignore: 'pid,hostname',

@@ -1,15 +1,20 @@
-import { type Application } from 'express';
-import { PORT } from 'app/env';
+import express, { type Application, type Router } from 'express';
+import { PORT } from './env';
+import { listen, logger } from './listen';
 
-class App {
+export class App {
   public api: Application;
 
-  constructor(api: Application) {
-    this.api = api;
+  constructor(api: Router) {
+    this.api = express();
     this.api.use('/api', api);
+  }
+
+  public async run(): Promise<void> {
     this.api.listen(PORT, () => {
-      console.log(`Server is listening on port ${PORT}`);
+      logger.info(`Server is listening on port ${PORT}`);
     });
+    await listen();
   }
 }
 
