@@ -1,5 +1,12 @@
 import env from 'dotenv';
+import { listen } from './listen';
+
 env.config();
 
-console.log('Hello World!');
-export {};
+async function main(): Promise<void> {
+  await listen();
+}
+
+void (async () => {
+  await main();
+})();
