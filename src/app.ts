@@ -1,21 +1,21 @@
-import express, { type Application, type Router } from 'express';
-import { PORT } from './env';
-import { listen, logger } from './listen';
+import { App } from './Application';
+import Logger from './Logger';
+import { ApiService } from './ApiService';
+import { INFURA_API_KEY, INFURA_ETH_MAINNET_WSS_URL } from './env';
+import Web3 from 'web3';
+import { EthService } from './EthService';
 
-export class App {
-  public api: Application;
+const logger = new Logger();
 
-  constructor(api: Router) {
-    this.api = express();
-    this.api.use('/api', api);
-  }
+const wsProvider = new Web3.providers.WebsocketProvider(
+  INFURA_ETH_MAINNET_WSS_URL + INFURA_API_KEY,
+);
+const web3 = new Web3(wsProvider);
 
-  public async run(): Promise<void> {
-    this.api.listen(PORT, () => {
-      logger.info(`Server is listening on port ${PORT}`);
-    });
-    await listen();
-  }
-}
+const ethService = new EthService({ web3, logger });
 
-export default App;
+const apiService = new ApiService({ ethService, logger });
+
+const app = new App({ apiService, ethService, logger });
+
+export default app;
