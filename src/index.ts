@@ -1,12 +1,8 @@
 import env from 'dotenv';
-import { listen } from './listen';
+import app from './app';
 
 env.config();
 
-async function main(): Promise<void> {
-  await listen();
-}
-
 void (async () => {
-  await main();
+  await app.run();
 })();
