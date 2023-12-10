@@ -1,30 +1,11 @@
 import ApiService from '../ApiService';
-import { type IEthService } from 'app/EthService';
-import { type ILogger } from 'app/Logger';
 import express from 'express';
 import request from 'supertest';
 import { faker } from '@faker-js/faker';
+import { mockEthService } from './ethService.mock';
+import { mockLogger } from './logger.mock';
 
-const mockEthService: jest.Mocked<IEthService> = {
-  latestBlockNumber: 123456,
-  latestBaseFeePerGas: 100,
-  latestAveragePriorityFee: '0.0001',
-  isFeeCurrent: true,
-  listen: jest.fn(),
-  fetchBlockDetails: jest.fn(),
-  estimateFee: jest.fn(),
-};
-
-const mockLogger: jest.Mocked<ILogger> = {
-  fatal: jest.fn(),
-  error: jest.fn(),
-  warn: jest.fn(),
-  info: jest.fn(),
-  debug: jest.fn(),
-  trace: jest.fn(),
-};
-
-describe('ApiService', () => {
+describe('ApiService unit tests', () => {
   let apiService: ApiService;
   let app: express.Application;
 
