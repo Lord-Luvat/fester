@@ -1,5 +1,8 @@
 import env from 'dotenv';
+import app from './app';
+
 env.config();
 
-console.log('Hello World!');
-export {};
+void (async () => {
+  await app.run();
+})();

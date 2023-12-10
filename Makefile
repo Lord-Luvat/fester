@@ -1,4 +1,4 @@
-.PHONY: environment build clean format start
+.PHONY: environment build format start test
 
 # Load env
 ifneq (,$(wildcard ./.env))
@@ -18,3 +18,6 @@ format:
 
 start:
 	npm run dev
+
+test:
+	npm run test
