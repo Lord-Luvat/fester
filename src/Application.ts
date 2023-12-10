@@ -35,7 +35,7 @@ export class App extends ServiceBase implements IApp {
     this.api.listen(PORT, () => {
       this._logger.info({}, `Server is listening on port ${PORT}`);
     });
-    await this.ethService.listen();
+    await this.ethService.setFeeEstimates();
   }
 }
 

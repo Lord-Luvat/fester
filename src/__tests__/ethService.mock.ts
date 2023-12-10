@@ -7,5 +7,5 @@ export const mockEthService: jest.Mocked<IEthService> = {
   isFeeCurrent: true,
   listen: jest.fn(),
   fetchBlockDetails: jest.fn(),
-  estimateFee: jest.fn(),
+  setFeeEstimates: jest.fn(),
 };
