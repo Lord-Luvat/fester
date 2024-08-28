@@ -19,7 +19,7 @@ export interface ITonService extends IServiceBase {
         wallet: WalletV3ContractR1,
         secretKey: Uint8Array,
     ) => Promise<void>;
-    getSeqNo: (wallet: WalletV3ContractR1) => Promise<number>;
+    getSeqno: (wallet: WalletV3ContractR1) => Promise<number>;
     transfer: () => Promise<void>;
     /* listen: (f: (result: any) => any) => Promise<void>;
     fetchBlockTransactions: (blockNumber: number) => Promise<any>;
@@ -35,8 +35,8 @@ export class TonService extends ServiceBase implements ITonService {
     private readonly tonweb;
     private readonly path;
     private readonly key;
-    private readonly privateKeyObject;
-    private readonly publicKeyObject;
+    /* private readonly privateKeyObject;
+    private readonly publicKeyObject; */
     private readonly wallet;
     private addressObject: InstanceType<TonWeb['Address']> | undefined;
     private nonBounceableAddress: string | undefined;
@@ -47,13 +47,13 @@ export class TonService extends ServiceBase implements ITonService {
         this.tonweb = tonweb;
         this.path = "m/44'/396'/0'/0/0";
         this.key = root.derivePath(this.path);
-        this.privateKeyObject = createPrivateKey({
+        /* this.privateKeyObject = createPrivateKey({
             key: this.privateKeyBuffer,
             format: 'der',
             type: 'pkcs8',
             encoding: 'buffer',
         });
-        this.publicKeyObject = createPublicKey(this.privateKeyObject);
+        this.publicKeyObject = createPublicKey(this.privateKeyObject); */
         this.wallet = this.tonweb.wallet.create({
             publicKey: this.publicKey,
         });
