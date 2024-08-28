@@ -1,4 +1,4 @@
-import TonWeb, { type AddressType } from 'tonweb';
+import TonWeb from 'tonweb';
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
 // import { Address } from 'tonweb';
 import {
@@ -7,7 +7,6 @@ import {
     ServiceBase,
 } from './ServiceBase';
 import { type WalletV3ContractR1 } from 'tonweb/dist/types/contract/wallet/v3/wallet-v3-contract-r1';
-import { createPrivateKey, createPublicKey, type KeyObject } from 'crypto';
 import { type BIP32Interface } from 'bip32';
 
 export interface ITonService extends IServiceBase {
