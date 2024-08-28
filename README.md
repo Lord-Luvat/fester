@@ -2,13 +2,17 @@
 
 ![Alt text](image.png)
 
-## QuickStart
+## QuickStart (for testing and testnets)
 
 1. run `make environment`
 2. set up an Infura account at https://app.infura.io/login
 3. copy the .env.example to a .env file, and add the details from Infura
-4. run `make start`
-5. in browser, navigate to http://localhost:8080/api/eth-mainnet/estimate-fee
+4. generate a **PRIVATE_KEY** for the .env on the command-line by running
+    `openssl rand -hex 32` in the terminal
+    
+    **DO NOT DO THIS FOR PRODUCTION! PRIVATE KEYS SHOULD NOT BE STORED IN PLAINTEXT IN AN env FILE FOR A MAINNET WALLET WITH ANY VALUABLE ASSETS OR ADMIN PRIVELEGES.**
+5. run `make start`
+6. in browser, navigate to http://localhost:8080/api/eth-mainnet/estimate-fee
 
 ## Test
 
