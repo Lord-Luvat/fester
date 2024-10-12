@@ -1,10 +1,6 @@
 import express, { type Application as ExpressApp } from 'express';
 import { PORT } from './env';
-import {
-    ServiceBase,
-    type IServiceBase,
-    type ServiceBaseProps,
-} from './ServiceBase';
+import { ServiceBase, type IServiceBase, type ServiceBaseProps } from './ServiceBase';
 import { type IEthService } from './EthService';
 import { type IApiService } from './ApiService';
 import { type ITonService } from './TonService';
@@ -37,7 +33,6 @@ export class App extends ServiceBase implements IApp {
     }
 
     public async run(): Promise<void> {
-        await this.tonService.init();
         this.api.listen(PORT, () => {
             this._logger.info({}, `Server is listening on port ${PORT}`);
         });

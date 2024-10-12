@@ -1,10 +1,6 @@
 import type Web3 from 'web3';
 import { type BlockHeaderOutput, type Numbers } from 'web3';
-import {
-    type ServiceBaseProps,
-    type IServiceBase,
-    ServiceBase,
-} from './ServiceBase';
+import { type ServiceBaseProps, type IServiceBase, ServiceBase } from './ServiceBase';
 
 // TODO: Figure out how to get the type directly from web3
 type TransactionObject = {
@@ -70,9 +66,7 @@ export class EthService extends ServiceBase implements IEthService {
      * Listen for new blocks and execute the given function when a new block is received.
      * @param func - The function to execute when a new block is received
      */
-    public async listen(
-        func: (result: BlockHeaderOutput) => any,
-    ): Promise<void> {
+    public async listen(func: (result: BlockHeaderOutput) => any): Promise<void> {
         const subscription = await this._eth.subscribe('newBlockHeaders');
         subscription.on('data', async (result) => {
             this._latestBlockNumber = result.number;
@@ -124,10 +118,7 @@ export class EthService extends ServiceBase implements IEthService {
     public async setFeeEstimates(): Promise<void> {
         await this.listen(async (result: BlockHeaderOutput) => {
             if (result.number === undefined) {
-                this._logger.error(
-                    {},
-                    'Error in setFeeEstimates: Block number is undefined',
-                );
+                this._logger.error({}, 'Error in setFeeEstimates: Block number is undefined');
                 return;
             }
 
@@ -135,9 +126,7 @@ export class EthService extends ServiceBase implements IEthService {
             this._latestBlockNumber = blockNumber;
 
             try {
-                const block = await this.fetchBlockDetails(
-                    this._latestBlockNumber,
-                );
+                const block = await this.fetchBlockDetails(this._latestBlockNumber);
                 if (block?.transactions == null) {
                     this._isFeeCurrent = false;
                     this._logger.error(
@@ -168,20 +157,14 @@ export class EthService extends ServiceBase implements IEthService {
                 const averagePriorityFee =
                     count > 0 ? totalPriorityFees / BigInt(count) : BigInt(0);
                 this._latestBaseFeePerGas = Number(
-                    this._utils.fromWei(
-                        block.baseFeePerGas?.toString() ?? '0',
-                        'gwei',
-                    ),
+                    this._utils.fromWei(block.baseFeePerGas?.toString() ?? '0', 'gwei'),
                 );
                 this._latestAveragePriorityFee = this._utils.fromWei(
                     averagePriorityFee.toString(),
                     'gwei',
                 );
 
-                this._logger.info(
-                    {},
-                    `Base Fee Per Gas: ${this._latestBaseFeePerGas} Gwei`,
-                );
+                this._logger.info({}, `Base Fee Per Gas: ${this._latestBaseFeePerGas} Gwei`);
                 this._logger.info(
                     {},
                     `Average Priority Fee: ${this._latestAveragePriorityFee} Gwei`,

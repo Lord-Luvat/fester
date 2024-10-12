@@ -1,8 +1,5 @@
 import express, { type Router } from 'express';
-import ServiceBase, {
-    type ServiceBaseProps,
-    type IServiceBase,
-} from './ServiceBase';
+import ServiceBase, { type ServiceBaseProps, type IServiceBase } from './ServiceBase';
 import { type IEthService } from './EthService';
 
 export interface IApiService extends IServiceBase {
@@ -29,28 +26,17 @@ export class ApiService extends ServiceBase implements IApiService {
     }
 
     // use arrow function to preserve `this` context in setupRoutes
-    private readonly estimateFee = (
-        req: express.Request,
-        res: express.Response,
-    ): void => {
+    private readonly estimateFee = (req: express.Request, res: express.Response): void => {
         try {
-            this._logger.info(
-                req,
-                `[${this.constructor.name}] estimateFee called with request:`,
-            );
+            this._logger.info(req, `[${this.constructor.name}] estimateFee called with request:`);
             res.status(200).json({
                 baseFeePerGas: Number(this._ethService.latestBaseFeePerGas), // Express doesn't support BigInt
-                averagePriorityFee: Number(
-                    this._ethService.latestAveragePriorityFee,
-                ), // Not a BigInt but converting to Number for consistency
+                averagePriorityFee: Number(this._ethService.latestAveragePriorityFee), // Not a BigInt but converting to Number for consistency
                 latestBlockNumber: Number(this._ethService.latestBlockNumber), // Express doesn't support BigInt
                 isFeeUpdated: this._ethService.isFeeCurrent,
             });
         } catch (error) {
-            this._logger.error(
-                error,
-                `[${this.constructor.name}] estimateFee failed with error:`,
-            );
+            this._logger.error(error, `[${this.constructor.name}] estimateFee failed with error:`);
             res.status(500).json({ error: 'Internal Server Error' });
         }
     };

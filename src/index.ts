@@ -4,5 +4,5 @@ import app from './app';
 env.config();
 
 void (async () => {
-  await app.run();
+    await app.run();
 })();

@@ -1,16 +1,17 @@
 {
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
-  },
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "eslint.format.enable": true,
-  "eslint.lintTask.enable": true,
-  "eslint.nodePath": "./node_modules",
-  "prettier.prettierPath": "./node_modules/prettier",
-  "prettier.requireConfig": true,
-  "eslint.validate": ["javascript", "typescript"],
-  "eslint.workingDirectories": ["./"],
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "cSpell.words": ["pino"]
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+    },
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "eslint.format.enable": true,
+    "eslint.lintTask.enable": true,
+    "eslint.nodePath": "./node_modules",
+    "prettier.prettierPath": "./node_modules/prettier",
+    "prettier.requireConfig": true,
+    "eslint.validate": ["javascript", "typescript"],
+    "eslint.workingDirectories": ["./"],
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "cSpell.words": ["pino", "Seqno", "workchain"],
+    "editor.detectIndentation": false
 }

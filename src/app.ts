@@ -1,19 +1,14 @@
 import { App } from './Application';
 import Logger from './Logger';
 import { ApiService } from './ApiService';
-import {
-    INFURA_API_KEY,
-    INFURA_ETH_MAINNET_WSS_URL,
-    TON_NODE_URI,
-    MNEMONIC,
-} from './env';
+import { INFURA_API_KEY, INFURA_ETH_MAINNET_WSS_URL, TON_NODE_URI, MNEMONIC } from './env';
 import Web3 from 'web3';
 import { EthService } from './EthService';
-import TonWeb from 'tonweb';
 import { TonService } from './TonService';
 import { mnemonicToSeedSync } from 'bip39';
 import { BIP32Factory } from 'bip32';
 import * as ecc from 'tiny-secp256k1';
+import { TonClient } from '@ton/ton';
 
 const bip32 = BIP32Factory(ecc);
 const seed = mnemonicToSeedSync(MNEMONIC);
@@ -28,10 +23,12 @@ const web3 = new Web3(wsProvider);
 
 const ethService = new EthService({ web3, logger });
 
-const tonweb = new TonWeb(new TonWeb.HttpProvider(TON_NODE_URI));
+const tonClient = new TonClient({
+    endpoint: TON_NODE_URI,
+});
 
 const tonService = new TonService({
-    tonweb,
+    client: tonClient,
     root,
     logger,
 });

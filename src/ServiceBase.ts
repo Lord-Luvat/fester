@@ -4,16 +4,16 @@ import type { ILogger } from 'app/Logger';
 export interface IServiceBase {}
 
 export type ServiceBaseProps = {
-  logger: ILogger;
+    logger: ILogger;
 };
 
 export abstract class ServiceBase implements IServiceBase {
-  protected readonly _logger;
+    protected readonly _logger;
 
-  constructor(props: ServiceBaseProps) {
-    const { logger } = props;
-    this._logger = logger;
-  }
+    constructor(props: ServiceBaseProps) {
+        const { logger } = props;
+        this._logger = logger;
+    }
 }
 
 export default ServiceBase;
